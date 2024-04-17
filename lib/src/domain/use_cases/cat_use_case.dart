@@ -1,3 +1,4 @@
+import 'package:catbreeds/src/data/models/breed_model.dart';
 import 'package:catbreeds/src/domain/repositories/i_cat_repository.dart';
 
 class CatUseCase {
@@ -5,7 +6,10 @@ class CatUseCase {
 
   CatUseCase({required ICatRepository catRepository}) : _catRepository = catRepository;
 
-  Future<String> get() async {
-    return _catRepository.get();
+  Future<List<BreedModel>> getBreeds(String search) async {
+    final breends = await  _catRepository.getBreeds(search);
+    final listImage =  await _catRepository.getImages(breends);
+    return listImage;
   }
+
 }
